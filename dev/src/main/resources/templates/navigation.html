@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>Navigation</title>
+</head>
+<body>
+    <!--Navigation bar-->
+    <div th:fragment="top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+
+                <a class="navbar-brand" href="#">Random Thoughts</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+
+                    <shiro:user>
+                        <form class="form-inline" th:action="@{/posts/submitsearch}" method="get">
+                            <input class="form-control mr-sm-2" type="search" name="keyword" placeholder="Search" aria-label="Search" autocomplete="off">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </shiro:user>
+
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" th:href="@{/home}">Home</a>
+                        </li>
+                        <shiro:user>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdownMenu" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false"><shiro:principal property="userId"/></a>
+                                <div class="dropdown-menu" aria-labelledby="userDropdownMenu">
+                                    <a class="dropdown-item" th:href="@{/logout}">Log Out</a>
+                                </div>
+                            </li>
+                        </shiro:user>
+                        <shiro:guest>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/login}">Login</a>
+                            </li>
+                        </shiro:guest>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!--Create Post Form-->
+    <div th:fragment="create">
+        <form action="#" th:action="@{/posts/submitpost}" th:object="${post}" method="POST">
+            <shiro:user><label for="newpost">What's New? Tell the world something!</label></shiro:user>
+            <shiro:guest><label for="newpost">Welcome! You can post as Guest!</label></shiro:guest>
+            <div class="form-group" id="newpost">
+                <label for="content">Content</label>
+                <textarea class="form-control" id="content" name="content" rows="4" th:field="*{content}" required maxlength="140"></textarea>
+            </div>
+
+            <div class="row justify-content-end">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary" style="float:right">Post</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!--Left Navigation-->
+    <div th:fragment="left">
+        <div class="card" >
+            <img class="card-img-top" th:src="@{/images/ycy1.jpg}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">YCY</h5>
+                <p class="card-text">Believe in YCY.</p>
+            </div>
+            <shiro:guest>
+                <ul class="list-group list-group-flush">
+                    <li style="list-style-type:none;"><a th:href="@{/login}" class="list-group-item">Login</a></li>
+                </ul>
+            </shiro:guest>
+            <shiro:user>
+                <ul class="list-group list-group-flush">
+                    <li style="list-style-type:none;"><a th:href="@{/posts/}" class="list-group-item">Global Stream (Main Page)</a></li>
+                    <li style="list-style-type:none;"><a th:href="@{/posts/suggestion}" class="list-group-item">Suggestions</a></li>
+                    <li style="list-style-type:none;"><a th:href="@{/posts/favoritelist}" class="list-group-item">Favorites</a></li>
+                    <li style="list-style-type:none;"><a th:href="@{/posts/dashboard}" class="list-group-item">Dashboard</a></li>
+                    <li style="list-style-type:none;"><a th:href="@{/posts/createpost}" class="list-group-item">Create New Post</a></li>
+                    <li style="list-style-type:none;"><a th:href="@{/posts/searchpost}" class="list-group-item">Search Post</a></li>
+                    <li style="list-style-type:none;"><a th:href="@{/posts/searchuser}" class="list-group-item">Search Post by User</a></li>
+                </ul>
+            </shiro:user>
+        </div>
+    </div>
+
+    <!---->
+
+</body>
+</html>

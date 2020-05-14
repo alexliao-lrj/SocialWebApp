@@ -1,0 +1,76 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Dashboard</title>
+</head>
+<body>
+<!-- Navigation -->
+<div th:include="navigation::top"></div>
+
+<hr>
+
+<!--page content container-->
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <!--left navigation-->
+            <div th:include="navigation::left"></div>
+        </div>
+
+        <div class="col-8">
+            <p>
+                <a th:href="@{/posts/}">Back to Main page</a>
+            </p>
+            <div class="row">
+                <h4 class="mb-4">Dash Board</h4>
+                <hr>
+            </div>
+            <!--stream content-->
+            <ul class="list-unstyled">
+                <li class="media mb-2">
+                    <div class="media-body" style="text-align:center;">
+                        <label for="daypost">Today's Posts</label>
+                        <h6 class="mb-4" id="daypost" th:text="${dashboard.day}">100</h6>
+                    </div>
+                </li>
+                <li>
+                    <hr>
+                </li>
+                <li class="media mb-2">
+                    <div class="media-body">
+                        <div class="row" style="text-align:center;">
+                            <div class="col-4">
+                                <label for="monthpost">This Month's Posts</label>
+                                <h6 class="mb-4" id="monthpost" th:text="${dashboard.month}">200</h6>
+                            </div>
+                            <div class="col-4">
+                                <label for="yearpost">This Year's Posts</label>
+                                <h6 class="mb-4" id="yearpost" th:text="${dashboard.year}">500</h6>
+                            </div>
+                            <div class="col-4">
+                                <label for="totalpost">Total Posts</label>
+                                <h6 class="mb-4" id="totalpost" th:text="${dashboard.total}">1000</h6>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
